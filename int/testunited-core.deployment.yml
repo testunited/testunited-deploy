@@ -20,7 +20,7 @@ spec:
         - name: spring.jpa.hibernate.ddl-auto
           value: "none"
         - name: spring.datasource.url
-          value: "jdbc:mysql://minikube:3306/testunited"
+          value: "jdbc:mysql://testunited-mysql-service:3306/testunited"
         - name: spring.datasource.username
           value: "springuser"
         - name: spring.datasource.password
