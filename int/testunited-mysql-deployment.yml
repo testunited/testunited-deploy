@@ -26,6 +26,8 @@ spec:
         volumeMounts:
         - name: testunited-mysql-pv
           mountPath: /var/lib/mysql
+        - name: testunited-mysql-init
+          mountPath: /docker-entrypoint-initdb.d
       volumes:
       - name: testunited-mysql-pv
         persistentVolumeClaim:
