@@ -1,14 +1,3 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: testunited-mysql-service
-spec:
-  ports:
-  - port: 3306
-  selector:
-    app: testunited-mysql-app
-  clusterIP: None
----
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
@@ -41,3 +30,7 @@ spec:
       - name: testunited-mysql-pv
         persistentVolumeClaim:
           claimName: testunited-mysql-pv-claim
+      - name: testunited-mysql-init
+        hostPath:
+          path: /mnt/data/testunited/mysql-init
+          type: Directory
