@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: testunited
+  name: core
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+  - host: {{ .Values.core.ingress.hostname }}
+    http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: {{ .Values.core.service.name }}
+          servicePort: {{ .Values.core.service.port }}

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: testunited
+  name: core
+  labels:
+    app: core
+spec:
+  selector:
+    matchLabels:
+      app: core
+  template:
+    metadata:
+      labels:
+        app: core
+    spec:
+      containers:
+      - name: core
+        image: {{ .Values.image.registry }}/{{ .Values.image.namespace }}/{{ .Values.core.image.repository }}:{{ .Values.core.image.tag }}
+        env:
+        - name: server.port
+          value: "{{ .Values.core.containerPort }}"
+        - name: spring.jpa.hibernate.ddl-auto
+          value: "none"
+        - name: spring.datasource.url
+          value: "jdbc:mysql://mysql:3306/testunited"
+        - name: spring.datasource.username
+          value: "springuser"
+        - name: spring.datasource.password
+          value: "testunited_spring"
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: {{ .Values.core.containerPort }}

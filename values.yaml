@@ -1,0 +1,13 @@
+# Default values for testunited-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+core:
+  containerPort: 80
+  service:
+    port: 80
+    name: core
+  image:
+    repository: testunited-core
+    tag: 1.0.1
+
