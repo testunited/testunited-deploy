@@ -1,0 +1,6 @@
+images:
+  testunited:
+    registry: asia.gcr.io
+    namespace: chamith-testunited
+    releaseTags:
+      core: 1.0.1
