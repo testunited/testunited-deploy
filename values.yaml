@@ -9,5 +9,3 @@ core:
     name: core
   image:
     repository: testunited-core
-    tag: 1.0.1
-

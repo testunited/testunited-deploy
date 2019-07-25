@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: core
-        image: {{ .Values.image.registry }}/{{ .Values.image.namespace }}/{{ .Values.core.image.repository }}:{{ .Values.core.image.tag }}
+        image: {{ .Values.images.testunited.registry }}/{{ .Values.images.testunited.namespace }}/{{ .Values.core.image.repository }}:{{ .Values.images.testunited.releaseTags.core }}
         env:
         - name: server.port
           value: "{{ .Values.core.containerPort }}"
