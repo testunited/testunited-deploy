@@ -1,7 +1,4 @@
+#### TestUnited v1.1.6 #####
+# Service Images
 images:
-  testunited:
-    registry: asia.gcr.io
-    namespace: chamith-testunited
-    releaseTags:
-      core: latest
-      
+  core: testunited/testunited-core:v0.1.0

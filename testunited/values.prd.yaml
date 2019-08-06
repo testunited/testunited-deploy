@@ -3,7 +3,10 @@
 # Declare variables to be passed into your templates.
 
 core:
-  containerPort: 80
   service:
-    port: 80
-    name: core
+    type: LoadBalancer
+
+env:
+  name: prd
+  namespace: testunited-prd
+  host: web-api.testunited.org 

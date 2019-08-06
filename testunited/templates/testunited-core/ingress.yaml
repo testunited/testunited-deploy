@@ -1,13 +1,15 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  namespace: testunited
+  namespace: {{ .Values.env.namespace }}
   name: core
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: {{ .Values.core.ingress.hostname }}
+  - host: {{ .Values.env.host }}
     http:
       paths:
       - path: /*

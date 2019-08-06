@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: testunited
+  namespace: {{ .Values.env.namespace }}
   name: core
   labels:
     app: core
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: core
-        image: {{ .Values.images.testunited.registry }}/{{ .Values.images.testunited.namespace }}/{{ .Values.core.image.repository }}:{{ .Values.images.testunited.releaseTags.core }}
+        image: {{ .Values.images.core }}
         env:
         - name: server.port
           value: "{{ .Values.core.containerPort }}"

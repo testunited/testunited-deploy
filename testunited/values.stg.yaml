@@ -5,5 +5,8 @@
 core:
   service:
     type: LoadBalancer
-  ingress:
-    hostname: testunited.sandbox.gke
+
+env:
+  name: stg
+  namespace: testunited-stg
+  host: stg.testunited.minikube.local 
