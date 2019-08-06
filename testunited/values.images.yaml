@@ -1,4 +1,4 @@
-#### TestUnited v1.1.6 #####
+#### TestUnited v1.3.0 #####
 # Service Images
 images:
-  core: testunited/testunited-core:v0.1.0
+  core: testunited/testunited-core:v0.1.0-rc1

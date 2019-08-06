@@ -1,6 +1,7 @@
 #! /bin/bash
 #registry_host="asia.gcr.io"
 registry_ns="testunited"
+registry_user="chamithsri"
 app_name="testunited"
 app_display_name="TestUnited"
 chart_file="$app_name/Chart.yaml"
@@ -31,10 +32,10 @@ else
   kube_ns="$app_name-$environment"
 fi
 
-#if [ -n "$registry_key_file" ]
-#then
-#  cat $registry_key_file | docker login -u _json_key --password-stdin "https://${registry_host}"
-#fi
+if [ -n "$registry_key_file" ]
+then
+  cat $registry_key_file | docker login -u $registry_user --password-stdin
+fi
 
 echo "#### TestUnited v$app_version #####" > $image_values_file
 echo "# Service Images" >> $image_values_file
