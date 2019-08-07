@@ -13,9 +13,6 @@ registry_key_file=$3
 app_version_match_string="appVersion: \"$app_version\""
 app_version_matched=$(grep -c "$app_version_match_string" "$chart_file")
 
-echo "$chart_file"
-grep "$app_version_match_string" "$chart_file"
-
 if [ $app_version_matched != 1 ]
 then
   echo "App version in Helm Chart does not match with the version mentioned."
