@@ -60,3 +60,9 @@ while read name sem_ver build_seq rc_seq ; do
 done < $manifest_file
 
 helm upgrade -i -f $image_values_file -f $env_values_file --namespace $kube_ns --description appVersion:$app_version $release_name $app_name
+
+git_tag="v$app_version"
+echo "tagging git with $git_tag"
+git tag $git_tag
+git push origin HEAD:master $git_tag
+echo "DONE: tagging git with $git_tag"
