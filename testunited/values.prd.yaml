@@ -5,8 +5,10 @@
 core:
   service:
     type: LoadBalancer
-
+webui:
+  service:
+    type: LoadBalancer
 env:
   name: prd
   namespace: testunited-prd
-  host: web-api.testunited.org 
+  host: testunited.org 

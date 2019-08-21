@@ -5,7 +5,9 @@
 core:
   service:
     type: ClusterIP
-
+webui:
+  service:
+    type: ClusterIP
 env:
   name: int
   namespace: testunited-int

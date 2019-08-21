@@ -5,7 +5,9 @@
 core:
   service:
     type: LoadBalancer
-
+webui:
+  service:
+    type: LoadBalancer
 env:
   name: stg
   namespace: testunited-stg

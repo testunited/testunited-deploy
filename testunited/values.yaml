@@ -7,3 +7,8 @@ core:
   service:
     port: 80
     name: core
+webui:
+  containerPort: 80
+  service:
+    port: 80
+    name: webui

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.env.namespace }}
+  name: webui
+  labels:
+    app: webui
+spec:
+  selector:
+    matchLabels:
+      app: webui
+  template:
+    metadata:
+      labels:
+        app: webui
+    spec:
+      containers:
+      - name: webui
+        image: {{ .Values.images.webui }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: {{ .Values.webui.containerPort }}

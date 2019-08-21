@@ -2,17 +2,17 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   namespace: {{ .Values.env.namespace }}
-  name: core
+  name: webui
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-  - host: web-api.{{ .Values.env.host }}
+  - host: web-ui.{{ .Values.env.host }}
     http:
       paths:
       - path: /*
         backend:
-          serviceName: {{ .Values.core.service.name }}
-          servicePort: {{ .Values.core.service.port }}
+          serviceName: {{ .Values.webui.service.name }}
+          servicePort: {{ .Values.webui.service.port }}
