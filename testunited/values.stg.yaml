@@ -11,4 +11,4 @@ webui:
 env:
   name: stg
   namespace: testunited-stg
-  host: stg.testunited.minikube.local 
+  host: stg.testunited.org 

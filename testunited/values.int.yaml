@@ -11,4 +11,4 @@ webui:
 env:
   name: int
   namespace: testunited-int
-  host: int.testunited.minikube.local 
+  host: int.testunited.org 
