@@ -59,7 +59,7 @@ while read name sem_ver build_seq rc_seq ; do
   echo "  $name: $image_full_name:${release_tag}" >> $image_values_file
 done < $manifest_file
 
-helm upgrade -i -f $image_values_file -f $env_values_file --namespace $kube_ns --description appVersion:$app_version $release_name $app_name
+helm upgrade -i -f $image_values_file -f $env_values_file --namespace $kube_ns $release_name $app_name
 
 git_tag="v$app_version"
 echo "tagging git with $git_tag"

@@ -6,46 +6,67 @@ metadata:
 data:
   mysql-init-data.sql: |
     CREATE DATABASE testunited;
+
     CREATE USER 'springuser'@'%' identified by 'testunited_spring';
 
     GRANT ALL on testunited.* to 'springuser'@'%';
 
     USE testunited;
+        
+    DROP TABLE IF EXISTS `application`;
+    CREATE TABLE `application` (
+      `id` varchar(255) NOT NULL,
+      `description` varchar(255) DEFAULT NULL,
+      `name` varchar(255) NOT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `UKlspnba25gpku3nx3oecprrx8c` (`name`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+    DROP TABLE IF EXISTS `component`;
+    CREATE TABLE `component` (
+      `id` varchar(255) NOT NULL,
+      `description` varchar(255) DEFAULT NULL,
+      `name` varchar(255) NOT NULL,
+      `application_id` varchar(255) NOT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `UKcrhyrrienidvycxkb38dd1cga` (`name`,`application_id`),
+      KEY `FKixsub86rqclovg5em1moe2x6a` (`application_id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
     DROP TABLE IF EXISTS `hibernate_sequence`;
-
     CREATE TABLE `hibernate_sequence` (
       `next_val` bigint(20) DEFAULT NULL
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
     DROP TABLE IF EXISTS `test_case`;
-
     CREATE TABLE `test_case` (
       `id` varchar(255) NOT NULL,
       `description` varchar(255) DEFAULT NULL,
       `name` varchar(255) DEFAULT NULL,
       `test_source_id` varchar(255) NOT NULL,
+      `application_id` varchar(255) NOT NULL,
       `test_group_id` varchar(255) DEFAULT NULL,
       `test_target_id` varchar(255) DEFAULT NULL,
       PRIMARY KEY (`id`),
       UNIQUE KEY `UK6ualjey3w8rvtruexxeloja59` (`test_source_id`),
+      KEY `FKnxjvcuy1bid151sa8ntb4qoan` (`application_id`),
       KEY `FKkqtj0ixpyc34qfin7lkt8t3ok` (`test_group_id`),
       KEY `FKmt42y2q484cbu0dygsbr1g84d` (`test_target_id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
     DROP TABLE IF EXISTS `test_group`;
-
     CREATE TABLE `test_group` (
       `id` varchar(255) NOT NULL,
       `name` varchar(255) DEFAULT NULL,
-      PRIMARY KEY (`id`)
+      `application_id` varchar(255) DEFAULT NULL,
+      PRIMARY KEY (`id`),
+      KEY `FKj01sqo90n5pdflr4ta2uadcrq` (`application_id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
     DROP TABLE IF EXISTS `test_run`;
-
     CREATE TABLE `test_run` (
       `id` varchar(255) NOT NULL,
-      `reason` varchar(1023) DEFAULT NULL,
+      `reason` varchar(255) DEFAULT NULL,
       `result` bit(1) NOT NULL,
       `time_stamp` datetime DEFAULT NULL,
       `test_case_id` varchar(255) DEFAULT NULL,
@@ -56,20 +77,24 @@ data:
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
     DROP TABLE IF EXISTS `test_session`;
-
     CREATE TABLE `test_session` (
       `id` varchar(255) NOT NULL,
+      `environment` varchar(255) NOT NULL,
       `name` varchar(255) NOT NULL,
+      `application_id` varchar(255) NOT NULL,
       PRIMARY KEY (`id`),
-      UNIQUE KEY `UKqeck57rf44rrp7m0j4plfmyy6` (`name`)
+      UNIQUE KEY `UKmivtecgyhhqxw9aa6o481uexw` (`name`,`application_id`,`environment`),
+      KEY `FKs53hjs3i8csynq6kcsel4leun` (`application_id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
     DROP TABLE IF EXISTS `test_target`;
-
     CREATE TABLE `test_target` (
       `id` varchar(255) NOT NULL,
-      `method` varchar(255) DEFAULT NULL,
-      `microservice` varchar(255) DEFAULT NULL,
-      `path` varchar(255) DEFAULT NULL,
-      PRIMARY KEY (`id`)
+      `name` varchar(255) NOT NULL,
+      `component_id` varchar(255) NOT NULL,
+      PRIMARY KEY (`id`),
+      UNIQUE KEY `UKmivtecgyhhqxw9aa6o481uabc` (`name`,`component_id`),
+      KEY `FKmtd0q08b46qou11fuw78ubmti` (`component_id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=latin1; (`name`,`component_id`),
+      KEY `FKmtd0q08b46qou11fuw78ubmti` (`component_id`)
     ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
