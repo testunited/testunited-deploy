@@ -2,24 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: {{ .Values.env.namespace }}
-  name: core
+  name: webapi
   labels:
-    app: core
+    app: webapi
 spec:
   selector:
     matchLabels:
-      app: core
+      app: webapi
   template:
     metadata:
       labels:
-        app: core
+        app: webapi
     spec:
       containers:
-      - name: core
-        image: {{ .Values.images.core }}
+      - name: webapi
+        image: {{ .Values.images.webapi }}
         env:
         - name: server.port
-          value: "{{ .Values.core.containerPort }}"
+          value: "{{ .Values.webapi.containerPort }}"
         - name: spring.jpa.hibernate.ddl-auto
           value: "none"
         - name: spring.datasource.url
@@ -30,4 +30,4 @@ spec:
           value: "testunited_spring"
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: {{ .Values.core.containerPort }}
+        - containerPort: {{ .Values.webapi.containerPort }}

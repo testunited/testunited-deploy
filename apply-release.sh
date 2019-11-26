@@ -25,7 +25,6 @@ then
   exit 0
 else
   env_values_file="$app_name/values.$environment.yaml"
-  release_name="$app_name-$environment"
   kube_ns="$app_name-$environment"
 fi
 
@@ -34,11 +33,15 @@ then
   cat $registry_key_file | docker login -u $registry_user --password-stdin
 fi
 
+release_name="$app_name"
+
 echo "#### TestUnited v$app_version #####" > $image_values_file
 echo "# Service Images" >> $image_values_file
 echo "images:" >> $image_values_file
 
-while read name sem_ver build_seq rc_seq ; do
+printf "%s\n" "============ SERVICES ============"
+
+while read srv_name img_name sem_ver build_seq rc_seq ; do
   
   build_tag="$sem_ver-$build_seq"
 
@@ -49,15 +52,20 @@ while read name sem_ver build_seq rc_seq ; do
     release_tag="$sem_ver-$rc_seq"
   fi
 
-  printf "%s\n" "name: ${name}"
-  printf "%s\n" "build_tag: ${build_tag}"
-  printf "%s\n" "release_tag: ${release_tag}"
-  image_full_name="$registry_ns/$app_name-$name"
+  printf "\t%s\n" "--------'${srv_name}'--------"
+  printf "\t%s\n" "Image Name: ${img_name}"
+  printf "\t%s\n" "Build Tag: ${build_tag}"
+  printf "\t%s\n" "Release Tag: ${release_tag}"
+
+  image_full_name="$registry_ns/$app_name-$img_name"
   docker pull "$image_full_name:${build_tag}"
   docker tag "$image_full_name:${build_tag}" "$image_full_name:${release_tag}"
   docker push "$image_full_name:${release_tag}"
-  echo "  $name: $image_full_name:${release_tag}" >> $image_values_file
+  echo "  $srv_name: $image_full_name:${release_tag}" >> $image_values_file
+  printf "\t%s\n" "-----------------------------"
 done < $manifest_file
+
+printf "%s\n" "===================================="
 
 helm upgrade -i -f $image_values_file -f $env_values_file --namespace $kube_ns $release_name $app_name
 

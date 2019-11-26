@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   namespace: {{ .Values.env.namespace }}
-  name: core
+  name: webapi
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
     kubernetes.io/ingress.class: nginx
@@ -14,5 +14,5 @@ spec:
       paths:
       - path: /*
         backend:
-          serviceName: {{ .Values.core.service.name }}
-          servicePort: {{ .Values.core.service.port }}
+          serviceName: {{ .Values.webapi.service.name }}
+          servicePort: {{ .Values.webapi.service.port }}

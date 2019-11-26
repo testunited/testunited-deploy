@@ -1,5 +1,5 @@
-#### TestUnited v1.5.3 #####
+#### TestUnited v1.5.5 #####
 # Service Images
 images:
-  core: testunited/testunited-core:v0.1.1-rc3
-  webui: testunited/testunited-webui:v0.1.1-rc2
+  webapi: testunited/testunited-web-api:0.1.1-rc6
+  webui: testunited/testunited-web-ui:0.1.1-rc2

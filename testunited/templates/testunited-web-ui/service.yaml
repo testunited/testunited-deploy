@@ -4,10 +4,10 @@ metadata:
   namespace: {{ .Values.env.namespace }}
   name: webui
 spec:
-  type: {{ .Values.core.service.type }}
+  type: {{ .Values.webui.service.type }}
   selector:
     app: webui
   ports:
   - protocol: TCP
-    port: {{ .Values.core.service.port }}
-    targetPort: {{ .Values.core.containerPort }}
+    port: {{ .Values.webui.service.port }}
+    targetPort: {{ .Values.webui.containerPort }}
