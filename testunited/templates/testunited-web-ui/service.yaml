@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: {{ .Values.env.namespace }}
+  namespace: {{ .Release.Namespace }}
   name: webui
 spec:
   type: {{ .Values.webui.service.type }}

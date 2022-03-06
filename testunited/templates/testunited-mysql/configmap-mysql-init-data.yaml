@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: {{ .Values.env.namespace }}
+  namespace: {{ .Release.Namespace }}
   name: mysql-init-data
 data:
   mysql-init-data.sql: |

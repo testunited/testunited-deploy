@@ -1,7 +1,7 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  namespace: {{ .Values.env.namespace }}
+  namespace: {{ .Release.Namespace }}
   name: webui
   annotations:
     nginx.ingress.kubernetes.io/use-regex: "true"
@@ -13,6 +13,9 @@ spec:
     http:
       paths:
       - path: /*
+        pathType: Prefix
         backend:
-          serviceName: {{ .Values.webui.service.name }}
-          servicePort: {{ .Values.webui.service.port }}
+          service:
+            name: {{ .Values.webui.service.name }}
+            port: 
+              number: {{ .Values.webui.service.port }}

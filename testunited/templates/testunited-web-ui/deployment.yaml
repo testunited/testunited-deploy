@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: {{ .Values.env.namespace }}
+  namespace: {{ .Release.Namespace }}
   name: webui
   labels:
     app: webui

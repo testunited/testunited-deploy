@@ -4,10 +4,10 @@
 
 webapi:
   service:
-    type: ClusterIP
+    type: LoadBalancer
 webui:
   service:
-    type: ClusterIP
+    type: LoadBalancer
 env:
   name: int
   namespace: testunited-int
